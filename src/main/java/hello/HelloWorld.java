@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 //export GOOGLE_APPLICATION_CREDENTIALS="~/Downloads/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
+//export GOOGLE_APPLICATION_CREDENTIALS="/home/centos/weizhang/TestFCM/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
 public class HelloWorld {
     public static void main(String[] args) throws Exception{
 
@@ -36,10 +37,17 @@ public class HelloWorld {
 
         String topic = "rhh-1492-newJob";
 
-        Message message = Message.builder()
+        /*Message message = Message.builder()
                 .putData("score", "850")
                 .putData("time", "2:45")
                 .setTopic(topic)
+                .build();*/
+
+        Message message = Message.builder()
+                .setNotification(Notification.builder()
+                        .setTitle("Test from Zhang wei")
+                        .setBody("Body")
+                        .build()).setTopic("rhh-1492-newJob")
                 .build();
 
         String response = FirebaseMessaging.getInstance().send(message);
