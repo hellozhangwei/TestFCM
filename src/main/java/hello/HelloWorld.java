@@ -5,6 +5,8 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.messaging.*;
+import com.thedeanda.lorem.Lorem;
+import com.thedeanda.lorem.LoremIpsum;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,10 +45,12 @@ public class HelloWorld {
                 .setTopic(topic)
                 .build();*/
 
+        Lorem lorem = LoremIpsum.getInstance();
+
         Message message = Message.builder()
                 .setNotification(Notification.builder()
-                        .setTitle(sdf.format(date) + " : Test is message title ")
-                        .setBody("This message body. Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+                        .setTitle(sdf.format(date) + " : [Title] " + lorem.getTitle(5))
+                        .setBody("[Body] " + lorem.getWords(10))
                         .build())
                 .setTopic("rhh-1492-newJob")
                 .putData("sendTime", date.getTime() + "")
