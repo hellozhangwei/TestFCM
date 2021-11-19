@@ -4,10 +4,7 @@ import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingException;
-import com.google.firebase.messaging.Message;
-import com.google.firebase.messaging.Notification;
+import com.google.firebase.messaging.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -50,7 +47,10 @@ public class HelloWorld {
                 .setNotification(Notification.builder()
                         .setTitle(sdf.format(date) + " : Test is message title ")
                         .setBody("This message body. Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-                        .build()).setTopic("rhh-1492-newJob").putData("sendTime", date.getTime() + "")
+                        .build())
+                .setTopic("rhh-1492-newJob")
+                .putData("sendTime", date.getTime() + "")
+                .setApnsConfig(ApnsConfig.builder().putHeader("apns-priority", "10").build())
                 .build();
 
         String response = FirebaseMessaging.getInstance().send(message);
