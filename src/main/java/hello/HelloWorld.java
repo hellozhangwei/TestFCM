@@ -50,7 +50,7 @@ public class HelloWorld {
                         .build())
                 .setTopic("rhh-1492-newJob")
                 .putData("sendTime", date.getTime() + "")
-                .setApnsConfig(ApnsConfig.builder().putHeader("apns-priority", "10").build())
+                //.setApnsConfig(ApnsConfig.builder().putHeader("apns-priority", "10").build())
                 .build();
 
         String response = FirebaseMessaging.getInstance().send(message);
