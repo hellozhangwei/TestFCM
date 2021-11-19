@@ -45,11 +45,9 @@ public class HelloWorld {
         Lorem lorem = LoremIpsum.getInstance();
 
         Message message = Message.builder()
-                .setNotification(Notification.builder()
-                        .setTitle("[Title] " + lorem.getTitle(5))
-                        .setBody("Server Time " + sdf.format(date) + " " + timeZone.getID() + "\r\n" + "[Body] "  + lorem.getWords(10))
-                        .build())
                 .setTopic("rhh-1492-newJob")
+                .putData("title","[Title] " + lorem.getTitle(5))
+                .putData("body","[Title] " + "Server Time " + sdf.format(date) + " " + timeZone.getID() + "\r\n" + "[Body] "  + lorem.getWords(10))
                 .putData("sendTime", date.getTime() + "")
                 .setAndroidConfig(AndroidConfig.builder().setPriority(AndroidConfig.Priority.HIGH).build())
                 //.setApnsConfig(ApnsConfig.builder().setAps(Aps.builder().setAlert("aps alert test").build()).putHeader("apns-priority", "10").build())
@@ -61,4 +59,3 @@ public class HelloWorld {
 
     }
 }
-
