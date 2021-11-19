@@ -9,6 +9,6 @@ repositories {
 
 
 dependencies {
-    compile 'com.thedeanda:lorem:2.1'
+    implementation 'com.thedeanda:lorem:2.1'
     implementation 'com.google.firebase:firebase-admin:8.1.0'
 }
