@@ -11,6 +11,8 @@ import com.google.firebase.messaging.Notification;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 //export GOOGLE_APPLICATION_CREDENTIALS="~/Downloads/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
 //export GOOGLE_APPLICATION_CREDENTIALS="/home/centos/weizhang/TestFCM/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
@@ -34,7 +36,8 @@ public class HelloWorld {
 
     public static void sendMessage() throws FirebaseMessagingException{
         System.out.println("Sending message... ");
-
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
         String topic = "rhh-1492-newJob";
 
         /*Message message = Message.builder()
@@ -45,14 +48,14 @@ public class HelloWorld {
 
         Message message = Message.builder()
                 .setNotification(Notification.builder()
-                        .setTitle("Test from Zhang wei")
-                        .setBody("Body")
-                        .build()).setTopic("rhh-1492-newJob")
+                        .setTitle(sdf.format(date) + " : Test is message title ")
+                        .setBody("This message body. Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+                        .build()).setTopic("rhh-1492-newJob").putData("sendTime", date.getTime() + "")
                 .build();
 
         String response = FirebaseMessaging.getInstance().send(message);
 
-        System.out.println("Sent message response: " + response);
+        System.out.println("Message response: " + response);
 
     }
 }
