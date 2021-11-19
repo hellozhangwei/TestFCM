@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 //export GOOGLE_APPLICATION_CREDENTIALS="~/Downloads/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
 //export GOOGLE_APPLICATION_CREDENTIALS="/home/centos/weizhang/TestFCM/rhh-pda-4479b-firebase-adminsdk-gfujz-95df79aeaa.json"
@@ -37,20 +38,16 @@ public class HelloWorld {
         System.out.println("Sending message... ");
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
-        String topic = "rhh-1492-newJob";
+        TimeZone timeZone = TimeZone.getDefault();
 
-        /*Message message = Message.builder()
-                .putData("score", "850")
-                .putData("time", "2:45")
-                .setTopic(topic)
-                .build();*/
+        String topic = "rhh-1492-newJob";
 
         Lorem lorem = LoremIpsum.getInstance();
 
         Message message = Message.builder()
                 .setNotification(Notification.builder()
-                        .setTitle(sdf.format(date) + " : [Title] " + lorem.getTitle(5))
-                        .setBody("[Body] " + lorem.getWords(10))
+                        .setTitle("[Title] " + lorem.getTitle(5))
+                        .setBody("Server Time " + sdf.format(date) + " " + timeZone.getID() + "\r\n" + "[Body] "  + lorem.getWords(10))
                         .build())
                 .setTopic("rhh-1492-newJob")
                 .putData("sendTime", date.getTime() + "")
